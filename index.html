@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HADES — Web3 Builder Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a0a0f;--surface:#12121a;--surface2:#1a1a2e;--border:#2a2a3e;
+  --text:#e8e6f0;--text2:#8888aa;--accent:#7c3aed;--accent2:#06b6d4;
+  --gold:#f59e0b;--green:#10b981;--red:#ef4444;--pink:#ec4899;
+  --gradient:linear-gradient(135deg,#7c3aed 0%,#06b6d4 50%,#ec4899 100%);
+  --glass:rgba(255,255,255,0.03);--glass-border:rgba(255,255,255,0.06);
+}
+html{scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:var(--accent) var(--bg)}
+body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;min-height:100vh}
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--accent);border-radius:3px}
+
+/* Noise overlay */
+body::before{content:'';position:fixed;inset:0;background:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:0.4}
+
+/* Glow orbs */
+.orb{position:fixed;border-radius:50%;filter:blur(100px);opacity:0.15;pointer-events:none;z-index:0}
+.orb-1{width:600px;height:600px;background:#7c3aed;top:-200px;left:-200px;animation:float 20s ease-in-out infinite}
+.orb-2{width:500px;height:500px;background:#06b6d4;bottom:-200px;right:-200px;animation:float 25s ease-in-out infinite reverse}
+.orb-3{width:400px;height:400px;background:#ec4899;top:50%;left:50%;transform:translate(-50%,-50%);animation:float 30s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translate(0,0)}25%{transform:translate(30px,-30px)}50%{transform:translate(-20px,20px)}75%{transform:translate(20px,10px)}}
+
+/* Nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;backdrop-filter:blur(20px);background:rgba(10,10,15,0.7);border-bottom:1px solid var(--glass-border);transition:all 0.3s}
+nav.scrolled{padding:0.6rem 2rem;background:rgba(10,10,15,0.9)}
+.nav-logo{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1.2rem;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:2px}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{color:var(--text2);text-decoration:none;font-size:0.85rem;font-weight:500;letter-spacing:1px;text-transform:uppercase;transition:color 0.3s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--gradient);transition:width 0.3s}
+.nav-links a:hover{color:var(--text)}
+.nav-links a:hover::after{width:100%}
+.nav-status{display:flex;align-items:center;gap:0.5rem;font-size:0.8rem;color:var(--green)}
+.nav-status .dot{width:8px;height:8px;background:var(--green);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+
+/* Hero */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:6rem 2rem 4rem;position:relative;z-index:1}
+.hero-badge{display:inline-flex;align-items:center;gap:0.5rem;padding:0.5rem 1.2rem;border:1px solid var(--border);border-radius:100px;font-size:0.75rem;color:var(--accent2);letter-spacing:2px;text-transform:uppercase;margin-bottom:2rem;backdrop-filter:blur(10px);background:var(--glass);animation:fadeInUp 0.8s ease}
+.hero h1{font-size:clamp(2.5rem,8vw,5.5rem);font-weight:700;line-height:1.1;margin-bottom:1.5rem;animation:fadeInUp 0.8s ease 0.1s backwards}
+.hero h1 .gradient{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-sub{font-size:clamp(1rem,2vw,1.3rem);color:var(--text2);max-width:600px;line-height:1.7;margin-bottom:3rem;animation:fadeInUp 0.8s ease 0.2s backwards}
+.hero-stats{display:flex;gap:3rem;flex-wrap:wrap;justify-content:center;animation:fadeInUp 0.8s ease 0.3s backwards}
+.hero-stat{text-align:center}
+.hero-stat .num{font-family:'JetBrains Mono',monospace;font-size:2.5rem;font-weight:700;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-stat .label{font-size:0.75rem;color:var(--text2);text-transform:uppercase;letter-spacing:2px;margin-top:0.3rem}
+.hero-cta{margin-top:3rem;display:flex;gap:1rem;animation:fadeInUp 0.8s ease 0.4s backwards}
+.btn{padding:0.8rem 2rem;border-radius:12px;font-family:'Space Grotesk',sans-serif;font-size:0.9rem;font-weight:600;cursor:pointer;transition:all 0.3s;text-decoration:none;display:inline-flex;align-items:center;gap:0.5rem}
+.btn-primary{background:var(--gradient);color:#fff;border:none;box-shadow:0 4px 20px rgba(124,58,237,0.3)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(124,58,237,0.5)}
+.btn-ghost{background:transparent;color:var(--text);border:1px solid var(--border)}
+.btn-ghost:hover{border-color:var(--accent);background:var(--glass)}
+
+/* Scroll indicator */
+.scroll-indicator{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:0.5rem;animation:bounce 2s infinite}
+.scroll-indicator span{font-size:0.7rem;color:var(--text2);letter-spacing:2px;text-transform:uppercase}
+.scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,var(--accent),transparent);animation:scrollLine 2s infinite}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
+@keyframes scrollLine{0%{opacity:0;transform:scaleY(0);transform-origin:top}50%{opacity:1;transform:scaleY(1)}100%{opacity:0;transform:scaleY(0);transform-origin:bottom}}
+
+/* Sections */
+section{padding:6rem 2rem;position:relative;z-index:1}
+.section-header{text-align:center;margin-bottom:4rem}
+.section-tag{font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--accent2);letter-spacing:3px;text-transform:uppercase;margin-bottom:1rem}
+.section-title{font-size:clamp(1.8rem,4vw,3rem);font-weight:700;margin-bottom:1rem}
+.section-desc{color:var(--text2);max-width:500px;margin:0 auto;line-height:1.6}
+
+/* Project Cards */
+.projects-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:1.5rem}
+.project-card{background:var(--surface);border:1px solid var(--glass-border);border-radius:20px;overflow:hidden;transition:all 0.4s cubic-bezier(0.16,1,0.3,1);position:relative;group:true}
+.project-card::before{content:'';position:absolute;inset:0;border-radius:20px;padding:1px;background:linear-gradient(135deg,transparent 40%,var(--accent) 50%,transparent 60%);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity 0.4s}
+.project-card:hover{transform:translateY(-4px);border-color:rgba(124,58,237,0.2)}
+.project-card:hover::before{opacity:1}
+.card-banner{height:180px;position:relative;overflow:hidden}
+.card-banner .bg{position:absolute;inset:0;opacity:0.6}
+.card-banner .icon{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:3.5rem;z-index:2;filter:drop-shadow(0 4px 20px rgba(0,0,0,0.5))}
+.card-banner .chain{position:absolute;top:1rem;right:1rem;padding:0.3rem 0.8rem;border-radius:8px;font-size:0.65rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;z-index:2;backdrop-filter:blur(10px)}
+.chain-eth{background:rgba(124,58,237,0.3);color:#a78bfa;border:1px solid rgba(124,58,237,0.3)}
+.chain-sol{background:rgba(6,182,212,0.3);color:#67e8f9;border:1px solid rgba(6,182,212,0.3)}
+.chain-multi{background:rgba(236,72,153,0.3);color:#f9a8d4;border:1px solid rgba(236,72,153,0.3)}
+.chain-web{background:rgba(245,158,11,0.3);color:#fcd34d;border:1px solid rgba(245,158,11,0.3)}
+.card-body{padding:1.5rem}
+.card-title{font-size:1.2rem;font-weight:700;margin-bottom:0.5rem}
+.card-desc{font-size:0.85rem;color:var(--text2);line-height:1.6;margin-bottom:1.2rem}
+.card-stats{display:flex;gap:1.5rem;margin-bottom:1.2rem}
+.card-stat{display:flex;align-items:center;gap:0.4rem;font-size:0.8rem}
+.card-stat .val{font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--text)}
+.card-stat .lbl{color:var(--text2)}
+.card-tags{display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:1.2rem}
+.tag{padding:0.25rem 0.6rem;border-radius:6px;font-size:0.7rem;font-weight:500;letter-spacing:0.5px}
+.tag-green{background:rgba(16,185,129,0.1);color:var(--green);border:1px solid rgba(16,185,129,0.2)}
+.tag-purple{background:rgba(124,58,237,0.1);color:#a78bfa;border:1px solid rgba(124,58,237,0.2)}
+.tag-cyan{background:rgba(6,182,212,0.1);color:var(--accent2);border:1px solid rgba(6,182,212,0.2)}
+.tag-gold{background:rgba(245,158,11,0.1);color:var(--gold);border:1px solid rgba(245,158,11,0.2)}
+.tag-red{background:rgba(239,68,68,0.1);color:var(--red);border:1px solid rgba(239,68,68,0.2)}
+.tag-pink{background:rgba(236,72,153,0.1);color:var(--pink);border:1px solid rgba(236,72,153,0.2)}
+.card-links{display:flex;gap:0.8rem}
+.card-link{display:flex;align-items:center;gap:0.4rem;font-size:0.8rem;color:var(--accent2);text-decoration:none;transition:color 0.3s}
+.card-link:hover{color:var(--text)}
+
+/* Stats Dashboard */
+.dashboard{max-width:1000px;margin:0 auto}
+.dash-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-bottom:2rem}
+.dash-card{background:var(--surface);border:1px solid var(--glass-border);border-radius:16px;padding:1.5rem;text-align:center;transition:all 0.3s}
+.dash-card:hover{border-color:rgba(124,58,237,0.3);transform:translateY(-2px)}
+.dash-card .icon{font-size:2rem;margin-bottom:0.8rem}
+.dash-card .num{font-family:'JetBrains Mono',monospace;font-size:2rem;font-weight:700;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.dash-card .label{font-size:0.75rem;color:var(--text2);text-transform:uppercase;letter-spacing:2px;margin-top:0.3rem}
+
+/* Activity timeline */
+.timeline{max-width:700px;margin:0 auto;position:relative}
+.timeline::before{content:'';position:absolute;left:1.5rem;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--accent),var(--accent2),var(--pink),transparent)}
+.timeline-item{display:flex;gap:1.5rem;margin-bottom:2rem;opacity:0;transform:translateX(-20px);transition:all 0.5s}
+.timeline-item.visible{opacity:1;transform:translateX(0)}
+.timeline-dot{width:12px;height:12px;border-radius:50%;background:var(--accent);flex-shrink:0;margin-top:0.3rem;position:relative;z-index:2;box-shadow:0 0 15px rgba(124,58,237,0.5)}
+.timeline-content{background:var(--surface);border:1px solid var(--glass-border);border-radius:12px;padding:1.2rem;flex:1}
+.timeline-content h4{font-size:0.95rem;margin-bottom:0.3rem}
+.timeline-content p{font-size:0.8rem;color:var(--text2);line-height:1.5}
+.timeline-content .time{font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--accent2);margin-bottom:0.5rem}
+
+/* Footer */
+footer{padding:3rem 2rem;text-align:center;border-top:1px solid var(--glass-border);position:relative;z-index:1}
+.footer-links{display:flex;justify-content:center;gap:2rem;margin-bottom:1.5rem}
+.footer-links a{color:var(--text2);text-decoration:none;font-size:0.85rem;transition:color 0.3s}
+.footer-links a:hover{color:var(--text)}
+.footer-copy{font-size:0.75rem;color:var(--text2)}
+
+/* Animations */
+@keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;transform:translateY(30px);transition:all 0.6s cubic-bezier(0.16,1,0.3,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* Mobile */
+@media(max-width:768px){
+  .nav-links{display:none}
+  .hero-stats{gap:1.5rem}
+  .hero-stat .num{font-size:1.8rem}
+  .projects-grid{grid-template-columns:1fr}
+  .hero-cta{flex-direction:column;align-items:center}
+  section{padding:4rem 1rem}
+}
+
+/* Cursor glow */
+.cursor-glow{position:fixed;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(124,58,237,0.08) 0%,transparent 70%);pointer-events:none;z-index:0;transform:translate(-50%,-50%);transition:left 0.1s,top 0.1s}
+
+/* Interactive card hover effect */
+.project-card .card-banner .bg{transition:transform 0.4s}
+.project-card:hover .card-banner .bg{transform:scale(1.05)}
+</style>
+</head>
+<body>
+
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<!-- Nav -->
+<nav id="nav">
+  <div class="nav-logo">⛧ HADES</div>
+  <ul class="nav-links">
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#dashboard">Dashboard</a></li>
+    <li><a href="#timeline">Timeline</a></li>
+    <li><a href="#about">About</a></li>
+  </ul>
+  <div class="nav-status"><span class="dot"></span> Systems Active</div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-badge">⛧ Web3 Builder & Operator</div>
+  <h1>Building the<br><span class="gradient">Decentralized Future</span></h1>
+  <p class="hero-sub">Full-stack Web3 operator specializing in DeFi protocols, NFT ecosystems, airdrop farming, smart contract automation, and on-chain exploit research.</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="num" data-count="6">0</div><div class="label">Projects Built</div></div>
+    <div class="hero-stat"><div class="num" data-count="10">0</div><div class="label">Accounts Active</div></div>
+    <div class="hero-stat"><div class="num" data-count="200">0</div><div class="label">NFTs Minted</div></div>
+    <div class="hero-stat"><div class="num" data-count="100">0</div><div class="label">Wallets Managed</div></div>
+  </div>
+  <div class="hero-cta">
+    <a href="#projects" class="btn btn-primary">View Projects ↓</a>
+    <a href="https://github.com/crowfly22" target="_blank" class="btn btn-ghost">GitHub ↗</a>
+  </div>
+  <div class="scroll-indicator">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- Projects -->
+<section id="projects">
+  <div class="section-header">
+    <div class="section-tag">// projects</div>
+    <h2 class="section-title">Built & Deployed</h2>
+    <p class="section-desc">Production-grade Web3 tools, smart contract interactions, and automated systems.</p>
+  </div>
+
+  <div class="projects-grid">
+
+    <!-- KnightMares Farm -->
+    <div class="project-card reveal">
+      <div class="card-banner">
+        <div class="bg" style="background:linear-gradient(135deg,#1a0a2e,#2d1b4e,#0f172a)"></div>
+        <div class="icon">🎃</div>
+        <div class="card chain-eth">ETH Mainnet</div>
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">KnightMares Auto-Farm</h3>
+        <p class="card-desc">Multi-account Supabase exploit system. Automated ember farming, chest opening, GTD/FCFS forge, and wallet submission. 10 accounts farmed daily via cron.</p>
+        <div class="card-stats">
+          <div class="card-stat"><span class="val">10</span><span class="lbl">Accounts</span></div>
+          <div class="card-stat"><span class="val">2,878</span><span class="lbl">Chests</span></div>
+          <div class="card-stat"><span class="val">10/10</span><span class="lbl">GTD+FCFS</span></div>
+        </div>
+        <div class="card-tags">
+          <span class="tag tag-red">Supabase Exploit</span>
+          <span class="tag tag-purple">Smart Contract</span>
+          <span class="tag tag-green">Auto-Farm</span>
+          <span class="tag tag-gold">Cron Job</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Rug Shield -->
+    <div class="project-card reveal">
+      <div class="card-banner">
+        <div class="bg" style="background:linear-gradient(135deg,#1a0a0a,#2d1b1b,#0f172a)"></div>
+        <div class="icon">🛡️</div>
+        <div class="card chain-web">Web3 Security</div>
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Rug Shield</h3>
+        <p class="card-desc">On-chain NFT & token security auditor. Analyzes smart contracts for rug pull indicators, hidden mint functions, ownership renouncement status, and liquidity locks.</p>
+        <div class="card-stats">
+          <div class="card-stat"><span class="val">15+</span><span class="lbl">Checks</span></div>
+          <div class="card-stat"><span class="val">EVM</span><span class="lbl">Chains</span></div>
+          <div class="card-stat"><span class="val">Real-time</span><span class="lbl">Analysis</span></div>
+        </div>
+        <div class="card-tags">
+          <span class="tag tag-red">Security</span>
+          <span class="tag tag-purple">Smart Contract</span>
+          <span class="tag tag-cyan">Single HTML</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Airdrop Hunter -->
+    <div class="project-card reveal">
+      <div class="card-banner">
+        <div class="bg" style="background:linear-gradient(135deg,#0a1a0a,#1b2d1b,#0f172a)"></div>
+        <div class="icon">🪂</div>
+        <div class="card chain-multi">Multi-Chain</div>
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Airdrop Hunter Pro</h3>
+        <p class="card-desc">Multi-chain airdrop opportunity tracker. Monitors 52+ protocols across Ethereum, Solana, Base, Arbitrum, and more. Wallet health scoring and eligibility checker.</p>
+        <div class="card-stats">
+          <div class="card-stat"><span class="val">52</span><span class="lbl">Protocols</span></div>
+          <div class="card-stat"><span class="val">6+</span><span class="lbl">Chains</span></div>
+          <div class="card-stat"><span class="val">Live</span><span class="lbl">Tracking</span></div>
+        </div>
+        <div class="card-tags">
+          <span class="tag tag-green">Airdrop</span>
+          <span class="tag tag-cyan">Multi-Chain</span>
+          <span class="tag tag-gold">Wallet Scoring</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PunksV2 Mint -->
+    <div class="project-card reveal">
+      <div class="card-banner">
+        <div class="bg" style="background:linear-gradient(135deg,#0a0a1a,#1a1a3a,#0f172a)"></div>
+        <div class="icon">👾</div>
+        <div class="card chain-eth">ETH Mainnet</div>
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">PunksV2 Multi-Mint</h3>
+        <p class="card-desc">Batch NFT minting across multiple wallets. Analyzed EIP-1167 minimal proxy contract, distributed ETH from master wallet, and minted across 10 wallets simultaneously.</p>
+        <div class="card-stats">
+          <div class="card-stat"><span class="val">11</span><span class="lbl">NFTs</span></div>
+          <div class="card-stat"><span class="val">10</span><span class="lbl">Wallets</span></div>
+          <div class="card-stat"><span class="val">~0.003</span><span class="lbl">ETH Cost</span></div>
+        </div>
+        <div class="card-tags">
+          <span class="tag tag-purple">NFT Mint</span>
+          <span class="tag tag-cyan">Batch TX</span>
+          <span class="tag tag-gold">EIP-1167</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Revenants -->
+    <div class="project-card reveal">
+      <div class="card-banner">
+        <div class="bg" style="background:linear-gradient(135deg,#1a0a0a,#0a0a1a,#1a0a2e)"></div>
+        <div class="icon">💀</div>
+        <div class="card chain-eth">ETH Mainnet</div>
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Revenants NFT</h3>
+        <p class="card-desc">Dark pixel art on-chain NFT. Decompiled contract ABI from site JS, executed paid mint via raw transaction. On-chain SVG generation with procedural traits.</p>
+        <div class="card-stats">
+          <div class="card-stat"><span class="val">1</span><span class="lbl">Minted</span></div>
+          <div class="card-stat"><span class="val">6,666</span><span class="lbl">Supply</span></div>
+          <div class="card-stat"><span class="val">0.0001</span><span class="lbl">ETH/ea</span></div>
+        </div>
+        <div class="card-tags">
+          <span class="tag tag-purple">NFT Mint</span>
+          <span class="tag tag-red">Contract Analysis</span>
+          <span class="tag tag-pink">On-Chain SVG</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Wallet Infra -->
+    <div class="project-card reveal">
+      <div class="card-banner">
+        <div class="bg" style="background:linear-gradient(135deg,#0a1a1a,#1a2a2a,#0f172a)"></div>
+        <div class="icon">🔐</div>
+        <div class="card chain-multi">Infrastructure</div>
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Wallet Infrastructure</h3>
+        <p class="card-desc">Bulk wallet generation and management system. 100 EVM wallets + 100 Solana wallets generated, securely stored, and integrated across all automated systems.</p>
+        <div class="card-stats">
+          <div class="card-stat"><span class="val">100</span><span class="lbl">EVM Wallets</span></div>
+          <div class="card-stat"><span class="val">100</span><span class="lbl">SOL Wallets</span></div>
+          <div class="card-stat"><span class="val">200</span><span class="lbl">Total</span></div>
+        </div>
+        <div class="card-tags">
+          <span class="tag tag-cyan">EVM</span>
+          <span class="tag tag-purple">Solana</span>
+          <span class="tag tag-green">Auto-Gen</span>
+          <span class="tag tag-gold">Secure Storage</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Dashboard -->
+<section id="dashboard">
+  <div class="section-header">
+    <div class="section-tag">// dashboard</div>
+    <h2 class="section-title">Live Operations</h2>
+    <p class="section-desc">Real-time stats across all automated systems.</p>
+  </div>
+  <div class="dashboard">
+    <div class="dash-grid">
+      <div class="dash-card reveal">
+        <div class="icon">🎃</div>
+        <div class="num" data-count="10">0</div>
+        <div class="label">KM Accounts</div>
+      </div>
+      <div class="dash-card reveal">
+        <div class="icon">📦</div>
+        <div class="num" data-count="2878">0</div>
+        <div class="label">Total Chests</div>
+      </div>
+      <div class="dash-card reveal">
+        <div class="icon">🔥</div>
+        <div class="num" data-count="10">0</div>
+        <div class="label">GTD Forged</div>
+      </div>
+      <div class="dash-card reveal">
+        <div class="icon">⏰</div>
+        <div class="num" data-count="24">0</div>
+        <div class="label">Farm Cycle (h)</div>
+      </div>
+      <div class="dash-card reveal">
+        <div class="icon">🪂</div>
+        <div class="num" data-count="52">0</div>
+        <div class="label">Airdrops Tracked</div>
+      </div>
+      <div class="dash-card reveal">
+        <div class="icon">👾</div>
+        <div class="num" data-count="12">0</div>
+        <div class="label">NFTs Minted</div>
+      </div>
+      <div class="dash-card reveal">
+        <div class="icon">🔐</div>
+        <div class="num" data-count="200">0</div>
+        <div class="label">Wallets Active</div>
+      </div>
+      <div class="dash-card reveal">
+        <div class="icon">⛓️</div>
+        <div class="num" data-count="5">0</div>
+        <div class="label">Chains Covered</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Timeline -->
+<section id="timeline">
+  <div class="section-header">
+    <div class="section-tag">// timeline</div>
+    <h2 class="section-title">Operation Log</h2>
+    <p class="section-desc">Chronological record of deployed systems and milestones.</p>
+  </div>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <div class="time">2026-05-27 01:30</div>
+        <h4>💀 Revenants NFT Minted</h4>
+        <p>Analyzed contract ABI from site JS, executed paid mint on ETH mainnet. 0.0001 ETH + gas.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot" style="background:var(--pink);box-shadow:0 0 15px rgba(236,72,153,0.5)"></div>
+      <div class="timeline-content">
+        <div class="time">2026-05-26 22:00</div>
+        <h4>🎃 KnightMares x10 Accounts</h4>
+        <p>Expanded farm from 3 to 10 accounts. All GTD+FCFS forged, wallets submitted. Daily cron active.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot" style="background:var(--gold);box-shadow:0 0 15px rgba(245,158,11,0.5)"></div>
+      <div class="timeline-content">
+        <div class="time">2026-05-26 20:00</div>
+        <h4>👾 PunksV2 Batch Mint</h4>
+        <p>Distributed ETH from W1 to 9 wallets. Minted 11 NFTs across 10 wallets. EIP-1167 proxy analysis.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot" style="background:var(--accent2);box-shadow:0 0 15px rgba(6,182,212,0.5)"></div>
+      <div class="timeline-content">
+        <div class="time">2026-05-26 18:00</div>
+        <h4>🔐 Wallet Infrastructure</h4>
+        <p>Generated 100 EVM wallets (W3-W100) and 100 Solana wallets for multi-project use.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot" style="background:var(--green);box-shadow:0 0 15px rgba(16,185,129,0.5)"></div>
+      <div class="timeline-content">
+        <div class="time">2026-05-26 16:00</div>
+        <h4>🪂 Airdrop Hunter Pro</h4>
+        <p>Built multi-chain airdrop tracker with 52 protocols. Wallet health scoring and eligibility checker.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <div class="time">2026-05-26 14:00</div>
+        <h4>🛡️ Rug Shield Deployed</h4>
+        <p>NFT security auditor with 15+ on-chain checks. Single HTML, zero dependencies, GitHub Pages live.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot" style="background:var(--pink);box-shadow:0 0 15px rgba(236,72,153,0.5)"></div>
+      <div class="timeline-content">
+        <div class="time">2026-05-26 10:00</div>
+        <h4>🎃 KnightMares Exploit</h4>
+        <p>Discovered Supabase anon key exposure. Full exploit chain: farm tasks → open chests → forge → submit wallet.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot" style="background:var(--accent2);box-shadow:0 0 15px rgba(6,182,212,0.5)"></div>
+      <div class="timeline-content">
+        <div class="time">2026-05-26 08:00</div>
+        <h4>🪂 Exquisite Waitlist</h4>
+        <p>Registered on Exquisite waitlist. Submitted X handle + ETH address.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- About -->
+<section id="about">
+  <div class="section-header">
+    <div class="section-tag">// about</div>
+    <h2 class="section-title">The Operator</h2>
+  </div>
+  <div style="max-width:700px;margin:0 auto;text-align:center">
+    <div style="font-size:4rem;margin-bottom:1.5rem">⛧</div>
+    <h3 style="font-size:1.5rem;margin-bottom:1rem">HADES</h3>
+    <p style="color:var(--text2);line-height:1.8;margin-bottom:2rem">
+      Full-stack Web3 operator and builder. Specializing in smart contract analysis, on-chain exploit research, automated airdrop farming, NFT minting systems, and multi-chain infrastructure. Every system built is production-grade, automated, and running 24/7.
+    </p>
+    <div style="display:flex;justify-content:center;gap:1rem;flex-wrap:wrap">
+      <a href="https://github.com/crowfly22" target="_blank" class="btn btn-ghost">GitHub ↗</a>
+      <a href="https://x.com/HolidayChirps" target="_blank" class="btn btn-ghost">X / Twitter ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-links">
+    <a href="https://github.com/crowfly22" target="_blank">GitHub</a>
+    <a href="https://x.com/HolidayChirps" target="_blank">X / Twitter</a>
+    <a href="#projects">Projects</a>
+    <a href="#dashboard">Dashboard</a>
+  </div>
+  <div class="footer-copy">⛧ HADES — Built with conviction. Powered by code. 2026.</div>
+</footer>
+
+<script>
+// Cursor glow
+const glow = document.getElementById('cursorGlow');
+document.addEventListener('mousemove', e => {
+  glow.style.left = e.clientX + 'px';
+  glow.style.top = e.clientY + 'px';
+});
+
+// Nav scroll
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
+});
+
+// Reveal on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 100);
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal, .timeline-item').forEach(el => observer.observe(el));
+
+// Counter animation
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const el = entry.target;
+      const target = parseInt(el.dataset.count);
+      if (!target) return;
+      const duration = 1500;
+      const start = performance.now();
+      const animate = (now) => {
+        const progress = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.floor(target * eased).toLocaleString();
+        if (progress < 1) requestAnimationFrame(animate);
+        else el.textContent = target.toLocaleString();
+      };
+      requestAnimationFrame(animate);
+      counterObserver.unobserve(el);
+    }
+  });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('[data-count]').forEach(el => counterObserver.observe(el));
+
+// Card tilt effect
+document.querySelectorAll('.project-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const rotateX = (y - centerY) / 20;
+    const rotateY = (centerX - x) / 20;
+    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+  });
+});
+</script>
+</body>
+</html>
