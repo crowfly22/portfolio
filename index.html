@@ -19,18 +19,12 @@ body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--tex
 ::-webkit-scrollbar{width:6px}
 ::-webkit-scrollbar-track{background:var(--bg)}
 ::-webkit-scrollbar-thumb{background:var(--accent);border-radius:3px}
-
-/* Noise overlay */
 body::before{content:'';position:fixed;inset:0;background:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:0.4}
-
-/* Glow orbs */
 .orb{position:fixed;border-radius:50%;filter:blur(100px);opacity:0.15;pointer-events:none;z-index:0}
 .orb-1{width:600px;height:600px;background:#7c3aed;top:-200px;left:-200px;animation:float 20s ease-in-out infinite}
 .orb-2{width:500px;height:500px;background:#06b6d4;bottom:-200px;right:-200px;animation:float 25s ease-in-out infinite reverse}
 .orb-3{width:400px;height:400px;background:#ec4899;top:50%;left:50%;transform:translate(-50%,-50%);animation:float 30s ease-in-out infinite}
 @keyframes float{0%,100%{transform:translate(0,0)}25%{transform:translate(30px,-30px)}50%{transform:translate(-20px,20px)}75%{transform:translate(20px,10px)}}
-
-/* Nav */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;backdrop-filter:blur(20px);background:rgba(10,10,15,0.7);border-bottom:1px solid var(--glass-border);transition:all 0.3s}
 nav.scrolled{padding:0.6rem 2rem;background:rgba(10,10,15,0.9)}
 .nav-logo{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1.2rem;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:2px}
@@ -42,13 +36,11 @@ nav.scrolled{padding:0.6rem 2rem;background:rgba(10,10,15,0.9)}
 .nav-status{display:flex;align-items:center;gap:0.5rem;font-size:0.8rem;color:var(--green)}
 .nav-status .dot{width:8px;height:8px;background:var(--green);border-radius:50%;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
-
-/* Hero */
 .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:6rem 2rem 4rem;position:relative;z-index:1}
 .hero-badge{display:inline-flex;align-items:center;gap:0.5rem;padding:0.5rem 1.2rem;border:1px solid var(--border);border-radius:100px;font-size:0.75rem;color:var(--accent2);letter-spacing:2px;text-transform:uppercase;margin-bottom:2rem;backdrop-filter:blur(10px);background:var(--glass);animation:fadeInUp 0.8s ease}
 .hero h1{font-size:clamp(2.5rem,8vw,5.5rem);font-weight:700;line-height:1.1;margin-bottom:1.5rem;animation:fadeInUp 0.8s ease 0.1s backwards}
 .hero h1 .gradient{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.hero-sub{font-size:clamp(1rem,2vw,1.3rem);color:var(--text2);max-width:600px;line-height:1.7;margin-bottom:3rem;animation:fadeInUp 0.8s ease 0.2s backwards}
+.hero-sub{font-size:clamp(1rem,2vw,1.3rem);color:var(--text2);max-width:650px;line-height:1.7;margin-bottom:3rem;animation:fadeInUp 0.8s ease 0.2s backwards}
 .hero-stats{display:flex;gap:3rem;flex-wrap:wrap;justify-content:center;animation:fadeInUp 0.8s ease 0.3s backwards}
 .hero-stat{text-align:center}
 .hero-stat .num{font-family:'JetBrains Mono',monospace;font-size:2.5rem;font-weight:700;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
@@ -59,35 +51,31 @@ nav.scrolled{padding:0.6rem 2rem;background:rgba(10,10,15,0.9)}
 .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(124,58,237,0.5)}
 .btn-ghost{background:transparent;color:var(--text);border:1px solid var(--border)}
 .btn-ghost:hover{border-color:var(--accent);background:var(--glass)}
-
-/* Scroll indicator */
 .scroll-indicator{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:0.5rem;animation:bounce 2s infinite}
 .scroll-indicator span{font-size:0.7rem;color:var(--text2);letter-spacing:2px;text-transform:uppercase}
 .scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,var(--accent),transparent);animation:scrollLine 2s infinite}
 @keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
 @keyframes scrollLine{0%{opacity:0;transform:scaleY(0);transform-origin:top}50%{opacity:1;transform:scaleY(1)}100%{opacity:0;transform:scaleY(0);transform-origin:bottom}}
-
-/* Sections */
 section{padding:6rem 2rem;position:relative;z-index:1}
 .section-header{text-align:center;margin-bottom:4rem}
 .section-tag{font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--accent2);letter-spacing:3px;text-transform:uppercase;margin-bottom:1rem}
 .section-title{font-size:clamp(1.8rem,4vw,3rem);font-weight:700;margin-bottom:1rem}
 .section-desc{color:var(--text2);max-width:500px;margin:0 auto;line-height:1.6}
-
-/* Project Cards */
 .projects-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:1.5rem}
-.project-card{background:var(--surface);border:1px solid var(--glass-border);border-radius:20px;overflow:hidden;transition:all 0.4s cubic-bezier(0.16,1,0.3,1);position:relative;group:true}
+.project-card{background:var(--surface);border:1px solid var(--glass-border);border-radius:20px;overflow:hidden;transition:all 0.4s cubic-bezier(0.16,1,0.3,1);position:relative}
 .project-card::before{content:'';position:absolute;inset:0;border-radius:20px;padding:1px;background:linear-gradient(135deg,transparent 40%,var(--accent) 50%,transparent 60%);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity 0.4s}
 .project-card:hover{transform:translateY(-4px);border-color:rgba(124,58,237,0.2)}
 .project-card:hover::before{opacity:1}
 .card-banner{height:180px;position:relative;overflow:hidden}
-.card-banner .bg{position:absolute;inset:0;opacity:0.6}
+.card-banner .bg{position:absolute;inset:0;opacity:0.6;transition:transform 0.4s}
+.project-card:hover .card-banner .bg{transform:scale(1.05)}
 .card-banner .icon{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:3.5rem;z-index:2;filter:drop-shadow(0 4px 20px rgba(0,0,0,0.5))}
 .card-banner .chain{position:absolute;top:1rem;right:1rem;padding:0.3rem 0.8rem;border-radius:8px;font-size:0.65rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;z-index:2;backdrop-filter:blur(10px)}
 .chain-eth{background:rgba(124,58,237,0.3);color:#a78bfa;border:1px solid rgba(124,58,237,0.3)}
 .chain-sol{background:rgba(6,182,212,0.3);color:#67e8f9;border:1px solid rgba(6,182,212,0.3)}
 .chain-multi{background:rgba(236,72,153,0.3);color:#f9a8d4;border:1px solid rgba(236,72,153,0.3)}
 .chain-web{background:rgba(245,158,11,0.3);color:#fcd34d;border:1px solid rgba(245,158,11,0.3)}
+.chain-ai{background:rgba(16,185,129,0.3);color:#6ee7b7;border:1px solid rgba(16,185,129,0.3)}
 .card-body{padding:1.5rem}
 .card-title{font-size:1.2rem;font-weight:700;margin-bottom:0.5rem}
 .card-desc{font-size:0.85rem;color:var(--text2);line-height:1.6;margin-bottom:1.2rem}
@@ -103,11 +91,9 @@ section{padding:6rem 2rem;position:relative;z-index:1}
 .tag-gold{background:rgba(245,158,11,0.1);color:var(--gold);border:1px solid rgba(245,158,11,0.2)}
 .tag-red{background:rgba(239,68,68,0.1);color:var(--red);border:1px solid rgba(239,68,68,0.2)}
 .tag-pink{background:rgba(236,72,153,0.1);color:var(--pink);border:1px solid rgba(236,72,153,0.2)}
-.card-links{display:flex;gap:0.8rem}
+.card-links{display:flex;gap:0.8rem;margin-top:0.5rem}
 .card-link{display:flex;align-items:center;gap:0.4rem;font-size:0.8rem;color:var(--accent2);text-decoration:none;transition:color 0.3s}
 .card-link:hover{color:var(--text)}
-
-/* Stats Dashboard */
 .dashboard{max-width:1000px;margin:0 auto}
 .dash-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-bottom:2rem}
 .dash-card{background:var(--surface);border:1px solid var(--glass-border);border-radius:16px;padding:1.5rem;text-align:center;transition:all 0.3s}
@@ -115,8 +101,6 @@ section{padding:6rem 2rem;position:relative;z-index:1}
 .dash-card .icon{font-size:2rem;margin-bottom:0.8rem}
 .dash-card .num{font-family:'JetBrains Mono',monospace;font-size:2rem;font-weight:700;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .dash-card .label{font-size:0.75rem;color:var(--text2);text-transform:uppercase;letter-spacing:2px;margin-top:0.3rem}
-
-/* Activity timeline */
 .timeline{max-width:700px;margin:0 auto;position:relative}
 .timeline::before{content:'';position:absolute;left:1.5rem;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--accent),var(--accent2),var(--pink),transparent)}
 .timeline-item{display:flex;gap:1.5rem;margin-bottom:2rem;opacity:0;transform:translateX(-20px);transition:all 0.5s}
@@ -126,20 +110,14 @@ section{padding:6rem 2rem;position:relative;z-index:1}
 .timeline-content h4{font-size:0.95rem;margin-bottom:0.3rem}
 .timeline-content p{font-size:0.8rem;color:var(--text2);line-height:1.5}
 .timeline-content .time{font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--accent2);margin-bottom:0.5rem}
-
-/* Footer */
 footer{padding:3rem 2rem;text-align:center;border-top:1px solid var(--glass-border);position:relative;z-index:1}
 .footer-links{display:flex;justify-content:center;gap:2rem;margin-bottom:1.5rem}
 .footer-links a{color:var(--text2);text-decoration:none;font-size:0.85rem;transition:color 0.3s}
 .footer-links a:hover{color:var(--text)}
 .footer-copy{font-size:0.75rem;color:var(--text2)}
-
-/* Animations */
 @keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
 .reveal{opacity:0;transform:translateY(30px);transition:all 0.6s cubic-bezier(0.16,1,0.3,1)}
 .reveal.visible{opacity:1;transform:translateY(0)}
-
-/* Mobile */
 @media(max-width:768px){
   .nav-links{display:none}
   .hero-stats{gap:1.5rem}
@@ -148,13 +126,7 @@ footer{padding:3rem 2rem;text-align:center;border-top:1px solid var(--glass-bord
   .hero-cta{flex-direction:column;align-items:center}
   section{padding:4rem 1rem}
 }
-
-/* Cursor glow */
 .cursor-glow{position:fixed;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(124,58,237,0.08) 0%,transparent 70%);pointer-events:none;z-index:0;transform:translate(-50%,-50%);transition:left 0.1s,top 0.1s}
-
-/* Interactive card hover effect */
-.project-card .card-banner .bg{transition:transform 0.4s}
-.project-card:hover .card-banner .bg{transform:scale(1.05)}
 </style>
 </head>
 <body>
@@ -178,14 +150,14 @@ footer{padding:3rem 2rem;text-align:center;border-top:1px solid var(--glass-bord
 
 <!-- Hero -->
 <section class="hero">
-  <div class="hero-badge">⛧ Web3 Builder & Operator</div>
-  <h1>Building the<br><span class="gradient">Decentralized Future</span></h1>
-  <p class="hero-sub">Full-stack Web3 operator specializing in DeFi protocols, NFT ecosystems, airdrop farming, smart contract automation, and on-chain exploit research.</p>
+  <div class="hero-badge">⛧ Full-Stack Builder & Operator</div>
+  <h1>Building the<br><span class="gradient">Digital Future</span></h1>
+  <p class="hero-sub">Full-stack operator specializing in AI-powered tools, Web3 security, browser automation, interactive experiences, and viral consumer apps. Every project ships as a single file — zero dependencies, maximum impact.</p>
   <div class="hero-stats">
-    <div class="hero-stat"><div class="num" data-count="6">0</div><div class="label">Projects Built</div></div>
-    <div class="hero-stat"><div class="num" data-count="10">0</div><div class="label">Accounts Active</div></div>
-    <div class="hero-stat"><div class="num" data-count="200">0</div><div class="label">NFTs Minted</div></div>
-    <div class="hero-stat"><div class="num" data-count="100">0</div><div class="label">Wallets Managed</div></div>
+    <div class="hero-stat"><div class="num" data-count="20">0</div><div class="label">Projects Built</div></div>
+    <div class="hero-stat"><div class="num" data-count="50">0</div><div class="label">Protocols Tracked</div></div>
+    <div class="hero-stat"><div class="num" data-count="200">0</div><div class="label">Wallets Managed</div></div>
+    <div class="hero-stat"><div class="num" data-count="5">0</div><div class="label">Chains Covered</div></div>
   </div>
   <div class="hero-cta">
     <a href="#projects" class="btn btn-primary">View Projects ↓</a>
@@ -202,31 +174,61 @@ footer{padding:3rem 2rem;text-align:center;border-top:1px solid var(--glass-bord
   <div class="section-header">
     <div class="section-tag">// projects</div>
     <h2 class="section-title">Built & Deployed</h2>
-    <p class="section-desc">Production-grade Web3 tools, smart contract interactions, and automated systems.</p>
+    <p class="section-desc">Production-grade tools, AI systems, and interactive experiences — all live on GitHub Pages.</p>
   </div>
 
   <div class="projects-grid">
 
-    <!-- KnightMares Farm -->
+    <!-- FlowForge -->
+    <div class="project-card reveal">
+      <div class="card-banner">
+        <div class="bg" style="background:linear-gradient(135deg,#0a2a1a,#1a3a2a,#0f172a)"></div>
+        <div class="icon">⚡</div>
+        <div class="card chain-ai">AI + Browser</div>
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">FlowForge</h3>
+        <p class="card-desc">AI-powered browser automation framework that translates natural language task descriptions into executable browser workflows. Stealth browsing, automatic OTP detection, persistent sessions, and monitoring dashboard.</p>
+        <div class="card-stats">
+          <div class="card-stat"><span class="val">Python</span><span class="lbl">Backend</span></div>
+          <div class="card-stat"><span class="val">React</span><span class="lbl">Frontend</span></div>
+          <div class="card-stat"><span class="val">Stealth</span><span class="lbl">Browsing</span></div>
+        </div>
+        <div class="card-tags">
+          <span class="tag tag-green">AI Agent</span>
+          <span class="tag tag-purple">Browser Automation</span>
+          <span class="tag tag-cyan">FastAPI</span>
+          <span class="tag tag-gold">OTP Detection</span>
+        </div>
+        <div class="card-links">
+          <a href="https://github.com/Punkrose/FlowForge" target="_blank" class="card-link">GitHub ↗</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRISM -->
     <div class="project-card reveal">
       <div class="card-banner">
         <div class="bg" style="background:linear-gradient(135deg,#1a0a2e,#2d1b4e,#0f172a)"></div>
-        <div class="icon">🎃</div>
-        <div class="card chain-eth">ETH Mainnet</div>
+        <div class="icon">🔬</div>
+        <div class="card chain-ai">AI Forensics</div>
       </div>
       <div class="card-body">
-        <h3 class="card-title">KnightMares Auto-Farm</h3>
-        <p class="card-desc">Multi-account Supabase exploit system. Automated ember farming, chest opening, GTD/FCFS forge, and wallet submission. 10 accounts farmed daily via cron.</p>
+        <h3 class="card-title">PRISM</h3>
+        <p class="card-desc">AI-powered prompt reverse engineering, model fingerprinting, and LLM benchmarking platform. Analyzes LLM outputs to infer prompts, identifies which model generated a response, and benchmarks performance across tasks.</p>
         <div class="card-stats">
-          <div class="card-stat"><span class="val">10</span><span class="lbl">Accounts</span></div>
-          <div class="card-stat"><span class="val">2,878</span><span class="lbl">Chests</span></div>
-          <div class="card-stat"><span class="val">10/10</span><span class="lbl">GTD+FCFS</span></div>
+          <div class="card-stat"><span class="val">6</span><span class="lbl">Models</span></div>
+          <div class="card-stat"><span class="val">35</span><span class="lbl">Tests</span></div>
+          <div class="card-stat"><span class="val">0</span><span class="lbl">Dependencies</span></div>
         </div>
         <div class="card-tags">
-          <span class="tag tag-red">Supabase Exploit</span>
-          <span class="tag tag-purple">Smart Contract</span>
-          <span class="tag tag-green">Auto-Farm</span>
-          <span class="tag tag-gold">Cron Job</span>
+          <span class="tag tag-purple">Prompt Engineering</span>
+          <span class="tag tag-green">Model Fingerprinting</span>
+          <span class="tag tag-cyan">LLM Benchmark</span>
+          <span class="tag tag-gold">Node.js</span>
+        </div>
+        <div class="card-links">
+          <a href="https://github.com/Punkrose/Prism" target="_blank" class="card-link">GitHub ↗</a>
         </div>
       </div>
     </div>
@@ -240,7 +242,7 @@ footer{padding:3rem 2rem;text-align:center;border-top:1px solid var(--glass-bord
       </div>
       <div class="card-body">
         <h3 class="card-title">Rug Shield</h3>
-        <p class="card-desc">On-chain NFT & token security auditor. Analyzes smart contracts for rug pull indicators, hidden mint functions, ownership renouncement status, and liquidity locks.</p>
+        <p class="card-desc">On-chain NFT & token security auditor. Analyzes smart contracts for rug pull indicators, hidden mint functions, ownership renouncement status, and liquidity locks. Real-time risk scoring.</p>
         <div class="card-stats">
           <div class="card-stat"><span class="val">15+</span><span class="lbl">Checks</span></div>
           <div class="card-stat"><span class="val">EVM</span><span class="lbl">Chains</span></div>
@@ -249,12 +251,15 @@ footer{padding:3rem 2rem;text-align:center;border-top:1px solid var(--glass-bord
         <div class="card-tags">
           <span class="tag tag-red">Security</span>
           <span class="tag tag-purple">Smart Contract</span>
-          <span class="tag tag-cyan">Single HTML</span>
+          <span class="tag tag-cyan">Auditor</span>
+        </div>
+        <div class="card-links">
+          <a href="https://github.com/crowfly22/RugShield" target="_blank" class="card-link">GitHub ↗</a>
         </div>
       </div>
     </div>
 
-    <!-- Airdrop Hunter -->
+    <!-- Airdrop Hunter Pro -->
     <div class="project-card reveal">
       <div class="card-banner">
         <div class="bg" style="background:linear-gradient(135deg,#0a1a0a,#1b2d1b,#0f172a)"></div>
@@ -263,7 +268,7 @@ footer{padding:3rem 2rem;text-align:center;border-top:1px solid var(--glass-bord
       </div>
       <div class="card-body">
         <h3 class="card-title">Airdrop Hunter Pro</h3>
-        <p class="card-desc">Multi-chain airdrop opportunity tracker. Monitors 52+ protocols across Ethereum, Solana, Base, Arbitrum, and more. Wallet health scoring and eligibility checker.</p>
+        <p class="card-desc">Multi-chain airdrop opportunity tracker. Monitors 52+ protocols across Ethereum, Solana, Base, Arbitrum, and more. Wallet health scoring, eligibility checker, and live tracking.</p>
         <div class="card-stats">
           <div class="card-stat"><span class="val">52</span><span class="lbl">Protocols</span></div>
           <div class="card-stat"><span class="val">6+</span><span class="lbl">Chains</span></div>
@@ -274,75 +279,64 @@ footer{padding:3rem 2rem;text-align:center;border-top:1px solid var(--glass-bord
           <span class="tag tag-cyan">Multi-Chain</span>
           <span class="tag tag-gold">Wallet Scoring</span>
         </div>
-      </div>
-    </div>
-
-    <!-- PunksV2 Mint -->
-    <div class="project-card reveal">
-      <div class="card-banner">
-        <div class="bg" style="background:linear-gradient(135deg,#0a0a1a,#1a1a3a,#0f172a)"></div>
-        <div class="icon">👾</div>
-        <div class="card chain-eth">ETH Mainnet</div>
-      </div>
-      <div class="card-body">
-        <h3 class="card-title">PunksV2 Multi-Mint</h3>
-        <p class="card-desc">Batch NFT minting across multiple wallets. Analyzed EIP-1167 minimal proxy contract, distributed ETH from master wallet, and minted across 10 wallets simultaneously.</p>
-        <div class="card-stats">
-          <div class="card-stat"><span class="val">11</span><span class="lbl">NFTs</span></div>
-          <div class="card-stat"><span class="val">10</span><span class="lbl">Wallets</span></div>
-          <div class="card-stat"><span class="val">~0.003</span><span class="lbl">ETH Cost</span></div>
-        </div>
-        <div class="card-tags">
-          <span class="tag tag-purple">NFT Mint</span>
-          <span class="tag tag-cyan">Batch TX</span>
-          <span class="tag tag-gold">EIP-1167</span>
+        <div class="card-links">
+          <a href="https://github.com/crowfly22/AirdropHunterPro" target="_blank" class="card-link">GitHub ↗</a>
         </div>
       </div>
     </div>
 
-    <!-- Revenants -->
+    <!-- CryptoBeasts -->
     <div class="project-card reveal">
       <div class="card-banner">
-        <div class="bg" style="background:linear-gradient(135deg,#1a0a0a,#0a0a1a,#1a0a2e)"></div>
-        <div class="icon">💀</div>
-        <div class="card chain-eth">ETH Mainnet</div>
+        <div class="bg" style="background:linear-gradient(135deg,#0a1a0a,#1a2a0a,#0f172a)"></div>
+        <div class="icon">🐉</div>
+        <div class="card chain-multi">Blockchain RPG</div>
       </div>
       <div class="card-body">
-        <h3 class="card-title">Revenants NFT</h3>
-        <p class="card-desc">Dark pixel art on-chain NFT. Decompiled contract ABI from site JS, executed paid mint via raw transaction. On-chain SVG generation with procedural traits.</p>
+        <h3 class="card-title">CryptoBeasts</h3>
+        <p class="card-desc">Blockchain-inspired pixel art monster RPG. Catch, train, battle, and trade unique beasts. Wallet address generates your unique starter. Turn-based combat, marketplace, breeding, and evolution system.</p>
         <div class="card-stats">
-          <div class="card-stat"><span class="val">1</span><span class="lbl">Minted</span></div>
-          <div class="card-stat"><span class="val">6,666</span><span class="lbl">Supply</span></div>
-          <div class="card-stat"><span class="val">0.0001</span><span class="lbl">ETH/ea</span></div>
+          <div class="card-stat"><span class="val">16</span><span class="lbl">Beasts</span></div>
+          <div class="card-stat"><span class="val">8</span><span class="lbl">Elements</span></div>
+          <div class="card-stat"><span class="val">Canvas</span><span class="lbl">Rendering</span></div>
         </div>
         <div class="card-tags">
-          <span class="tag tag-purple">NFT Mint</span>
-          <span class="tag tag-red">Contract Analysis</span>
-          <span class="tag tag-pink">On-Chain SVG</span>
+          <span class="tag tag-green">Game</span>
+          <span class="tag tag-purple">Pixel Art</span>
+          <span class="tag tag-pink">RPG</span>
+          <span class="tag tag-gold">Web3</span>
+        </div>
+        <div class="card-links">
+          <a href="https://github.com/Punkrose/CryptoBeasts" target="_blank" class="card-link">GitHub ↗</a>
+          <a href="https://punkrose.github.io/CryptoBeasts/" target="_blank" class="card-link">Live Demo ↗</a>
         </div>
       </div>
     </div>
 
-    <!-- Wallet Infra -->
+    <!-- AuraScope -->
     <div class="project-card reveal">
       <div class="card-banner">
-        <div class="bg" style="background:linear-gradient(135deg,#0a1a1a,#1a2a2a,#0f172a)"></div>
-        <div class="icon">🔐</div>
-        <div class="card chain-multi">Infrastructure</div>
+        <div class="bg" style="background:linear-gradient(135deg,#2a0a2e,#1a1a3a,#0a0a2a)"></div>
+        <div class="icon">✨</div>
+        <div class="card chain-web">Viral App</div>
       </div>
       <div class="card-body">
-        <h3 class="card-title">Wallet Infrastructure</h3>
-        <p class="card-desc">Bulk wallet generation and management system. 100 EVM wallets + 100 Solana wallets generated, securely stored, and integrated across all automated systems.</p>
+        <h3 class="card-title">AuraScope</h3>
+        <p class="card-desc">Viral, share-first aura reader that turns any name and vibe into a deterministic aura archetype, energy reading, color palette, and TikTok-ready share card. 24 archetypes, canvas-rendered visuals with particle trails.</p>
         <div class="card-stats">
-          <div class="card-stat"><span class="val">100</span><span class="lbl">EVM Wallets</span></div>
-          <div class="card-stat"><span class="val">100</span><span class="lbl">SOL Wallets</span></div>
-          <div class="card-stat"><span class="val">200</span><span class="lbl">Total</span></div>
+          <div class="card-stat"><span class="val">24</span><span class="lbl">Archetypes</span></div>
+          <div class="card-stat"><span class="val">1080px</span><span class="lbl">Share Card</span></div>
+          <div class="card-stat"><span class="val">Viral</span><span class="lbl">Loop</span></div>
         </div>
         <div class="card-tags">
-          <span class="tag tag-cyan">EVM</span>
-          <span class="tag tag-purple">Solana</span>
-          <span class="tag tag-green">Auto-Gen</span>
-          <span class="tag tag-gold">Secure Storage</span>
+          <span class="tag tag-pink">Viral</span>
+          <span class="tag tag-purple">Canvas Art</span>
+          <span class="tag tag-gold">Share Cards</span>
+          <span class="tag tag-cyan">TikTok Ready</span>
+        </div>
+        <div class="card-links">
+          <a href="https://github.com/Punkrose/AuraScope" target="_blank" class="card-link">GitHub ↗</a>
+          <a href="https://punkrose.github.io/AuraScope/" target="_blank" class="card-link">Live Demo ↗</a>
         </div>
       </div>
     </div>
@@ -355,39 +349,24 @@ footer{padding:3rem 2rem;text-align:center;border-top:1px solid var(--glass-bord
   <div class="section-header">
     <div class="section-tag">// dashboard</div>
     <h2 class="section-title">Live Operations</h2>
-    <p class="section-desc">Real-time stats across all automated systems.</p>
+    <p class="section-desc">Real-time stats across all active systems.</p>
   </div>
   <div class="dashboard">
     <div class="dash-grid">
       <div class="dash-card reveal">
-        <div class="icon">🎃</div>
-        <div class="num" data-count="10">0</div>
-        <div class="label">KM Accounts</div>
+        <div class="icon">🚀</div>
+        <div class="num" data-count="20">0</div>
+        <div class="label">Projects Shipped</div>
       </div>
       <div class="dash-card reveal">
-        <div class="icon">📦</div>
-        <div class="num" data-count="2878">0</div>
-        <div class="label">Total Chests</div>
-      </div>
-      <div class="dash-card reveal">
-        <div class="icon">🔥</div>
-        <div class="num" data-count="10">0</div>
-        <div class="label">GTD Forged</div>
-      </div>
-      <div class="dash-card reveal">
-        <div class="icon">⏰</div>
-        <div class="num" data-count="24">0</div>
-        <div class="label">Farm Cycle (h)</div>
+        <div class="icon">🤖</div>
+        <div class="num" data-count="6">0</div>
+        <div class="label">AI Agents Built</div>
       </div>
       <div class="dash-card reveal">
         <div class="icon">🪂</div>
         <div class="num" data-count="52">0</div>
-        <div class="label">Airdrops Tracked</div>
-      </div>
-      <div class="dash-card reveal">
-        <div class="icon">👾</div>
-        <div class="num" data-count="12">0</div>
-        <div class="label">NFTs Minted</div>
+        <div class="label">Protocols Tracked</div>
       </div>
       <div class="dash-card reveal">
         <div class="icon">🔐</div>
@@ -399,6 +378,21 @@ footer{padding:3rem 2rem;text-align:center;border-top:1px solid var(--glass-bord
         <div class="num" data-count="5">0</div>
         <div class="label">Chains Covered</div>
       </div>
+      <div class="dash-card reveal">
+        <div class="icon">🧪</div>
+        <div class="num" data-count="35">0</div>
+        <div class="label">Tests Passing</div>
+      </div>
+      <div class="dash-card reveal">
+        <div class="icon">🎨</div>
+        <div class="num" data-count="24">0</div>
+        <div class="label">Aura Archetypes</div>
+      </div>
+      <div class="dash-card reveal">
+        <div class="icon">🐉</div>
+        <div class="num" data-count="16">0</div>
+        <div class="label">Beast Templates</div>
+      </div>
     </div>
   </div>
 </section>
@@ -408,71 +402,71 @@ footer{padding:3rem 2rem;text-align:center;border-top:1px solid var(--glass-bord
   <div class="section-header">
     <div class="section-tag">// timeline</div>
     <h2 class="section-title">Operation Log</h2>
-    <p class="section-desc">Chronological record of deployed systems and milestones.</p>
+    <p class="section-desc">Chronological record of shipped projects and milestones.</p>
   </div>
   <div class="timeline">
     <div class="timeline-item">
-      <div class="timeline-dot"></div>
+      <div class="timeline-dot" style="background:var(--green);box-shadow:0 0 15px rgba(16,185,129,0.5)"></div>
       <div class="timeline-content">
-        <div class="time">2026-05-27 01:30</div>
-        <h4>💀 Revenants NFT Minted</h4>
-        <p>Analyzed contract ABI from site JS, executed paid mint on ETH mainnet. 0.0001 ETH + gas.</p>
+        <div class="time">2026-05-25</div>
+        <h4>⚡ StudioX & CreatorHub</h4>
+        <p>Creative canvas workspace and interactive content studio — diagrams, data viz, mood boards, branching stories, quizzes, and live code editor.</p>
       </div>
     </div>
     <div class="timeline-item">
       <div class="timeline-dot" style="background:var(--pink);box-shadow:0 0 15px rgba(236,72,153,0.5)"></div>
       <div class="timeline-content">
-        <div class="time">2026-05-26 22:00</div>
-        <h4>🎃 KnightMares x10 Accounts</h4>
-        <p>Expanded farm from 3 to 10 accounts. All GTD+FCFS forged, wallets submitted. Daily cron active.</p>
-      </div>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-dot" style="background:var(--gold);box-shadow:0 0 15px rgba(245,158,11,0.5)"></div>
-      <div class="timeline-content">
-        <div class="time">2026-05-26 20:00</div>
-        <h4>👾 PunksV2 Batch Mint</h4>
-        <p>Distributed ETH from W1 to 9 wallets. Minted 11 NFTs across 10 wallets. EIP-1167 proxy analysis.</p>
+        <div class="time">2026-05-24</div>
+        <h4>🔬 PRISM & CryptoSimulator</h4>
+        <p>LLM forensics toolkit (prompt reverse engineering, model fingerprinting, benchmarking) and paper trading simulator with cyberpunk UI and multi-agent analysis.</p>
       </div>
     </div>
     <div class="timeline-item">
       <div class="timeline-dot" style="background:var(--accent2);box-shadow:0 0 15px rgba(6,182,212,0.5)"></div>
       <div class="timeline-content">
-        <div class="time">2026-05-26 18:00</div>
-        <h4>🔐 Wallet Infrastructure</h4>
-        <p>Generated 100 EVM wallets (W3-W100) and 100 Solana wallets for multi-project use.</p>
+        <div class="time">2026-05-24</div>
+        <h4>🐉 ChainMon & CryptoBeasts</h4>
+        <p>Two blockchain monster RPGs — 32 monsters, 10 elements, Arena PvP, quest system, breeding, and pixel art battle scenes on Canvas 2D.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <div class="time">2026-05-23</div>
+        <h4>🎵 SynthScribe & MythicForge</h4>
+        <p>AI music pattern generator with Web Audio API and real-time visualization. AI-powered fantasy item forge with pixel art generation.</p>
       </div>
     </div>
     <div class="timeline-item">
       <div class="timeline-dot" style="background:var(--green);box-shadow:0 0 15px rgba(16,185,129,0.5)"></div>
       <div class="timeline-content">
-        <div class="time">2026-05-26 16:00</div>
-        <h4>🪂 Airdrop Hunter Pro</h4>
-        <p>Built multi-chain airdrop tracker with 52 protocols. Wallet health scoring and eligibility checker.</p>
+        <div class="time">2026-05-22</div>
+        <h4>✨ AuraScope & Glyph</h4>
+        <p>Viral aura reader with 24 archetypes and TikTok-ready share cards. Personal sigil generator with procedural Canvas geometry and 9 intention archetypes.</p>
       </div>
     </div>
     <div class="timeline-item">
-      <div class="timeline-dot"></div>
+      <div class="timeline-dot" style="background:var(--gold);box-shadow:0 0 15px rgba(245,158,11,0.5)"></div>
       <div class="timeline-content">
-        <div class="time">2026-05-26 14:00</div>
-        <h4>🛡️ Rug Shield Deployed</h4>
-        <p>NFT security auditor with 15+ on-chain checks. Single HTML, zero dependencies, GitHub Pages live.</p>
+        <div class="time">2026-05-22</div>
+        <h4>⚡ FlowForge & PRISM</h4>
+        <p>AI browser automation framework with stealth browsing and OTP detection. LLM forensics platform for prompt reverse engineering and model identification.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot" style="background:var(--accent);box-shadow:0 0 15px rgba(124,58,237,0.5)"></div>
+      <div class="timeline-content">
+        <div class="time">2026-05-22</div>
+        <h4>🛡️ Rug Shield & Aegis</h4>
+        <p>On-chain NFT security auditor with 15+ checks. AI Security Operations Center with real-time threat monitoring and cyberpunk SOC interface.</p>
       </div>
     </div>
     <div class="timeline-item">
       <div class="timeline-dot" style="background:var(--pink);box-shadow:0 0 15px rgba(236,72,153,0.5)"></div>
       <div class="timeline-content">
-        <div class="time">2026-05-26 10:00</div>
-        <h4>🎃 KnightMares Exploit</h4>
-        <p>Discovered Supabase anon key exposure. Full exploit chain: farm tasks → open chests → forge → submit wallet.</p>
-      </div>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-dot" style="background:var(--accent2);box-shadow:0 0 15px rgba(6,182,212,0.5)"></div>
-      <div class="timeline-content">
-        <div class="time">2026-05-26 08:00</div>
-        <h4>🪂 Exquisite Waitlist</h4>
-        <p>Registered on Exquisite waitlist. Submitted X handle + ETH address.</p>
+        <div class="time">2026-05-22</div>
+        <h4>🎵 VibeTune</h4>
+        <p>Mood-based playlist generator with 150+ hand-curated tracks across 10 mood categories. Deterministic generation, shareable playlists, zero backend.</p>
       </div>
     </div>
   </div>
@@ -488,7 +482,7 @@ footer{padding:3rem 2rem;text-align:center;border-top:1px solid var(--glass-bord
     <div style="font-size:4rem;margin-bottom:1.5rem">⛧</div>
     <h3 style="font-size:1.5rem;margin-bottom:1rem">HADES</h3>
     <p style="color:var(--text2);line-height:1.8;margin-bottom:2rem">
-      Full-stack Web3 operator and builder. Specializing in smart contract analysis, on-chain exploit research, automated airdrop farming, NFT minting systems, and multi-chain infrastructure. Every system built is production-grade, automated, and running 24/7.
+      Full-stack builder and operator. Specializing in AI-powered tools, Web3 security, browser automation, interactive gaming experiences, and viral consumer apps. Every project ships as a single file — zero dependencies, zero backend, maximum impact. 20+ projects built and deployed across GitHub Pages and Vercel.
     </p>
     <div style="display:flex;justify-content:center;gap:1rem;flex-wrap:wrap">
       <a href="https://github.com/crowfly22" target="_blank" class="btn btn-ghost">GitHub ↗</a>
@@ -509,19 +503,14 @@ footer{padding:3rem 2rem;text-align:center;border-top:1px solid var(--glass-bord
 </footer>
 
 <script>
-// Cursor glow
 const glow = document.getElementById('cursorGlow');
 document.addEventListener('mousemove', e => {
   glow.style.left = e.clientX + 'px';
   glow.style.top = e.clientY + 'px';
 });
-
-// Nav scroll
 window.addEventListener('scroll', () => {
   document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
 });
-
-// Reveal on scroll
 const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry, i) => {
     if (entry.isIntersecting) {
@@ -529,10 +518,7 @@ const observer = new IntersectionObserver((entries) => {
     }
   });
 }, { threshold: 0.1 });
-
 document.querySelectorAll('.reveal, .timeline-item').forEach(el => observer.observe(el));
-
-// Counter animation
 const counterObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -553,10 +539,7 @@ const counterObserver = new IntersectionObserver((entries) => {
     }
   });
 }, { threshold: 0.5 });
-
 document.querySelectorAll('[data-count]').forEach(el => counterObserver.observe(el));
-
-// Card tilt effect
 document.querySelectorAll('.project-card').forEach(card => {
   card.addEventListener('mousemove', e => {
     const rect = card.getBoundingClientRect();

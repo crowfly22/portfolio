@@ -2,50 +2,40 @@
 
 # ⛧ HADES — Web3 Builder Portfolio
 
-**Full-stack Web3 operator specializing in DeFi, NFTs, airdrop farming, and smart contract automation.**
+**Full-stack builder & operator. AI tools, Web3 security, browser automation, interactive experiences.**
 
 [![Live Site](https://img.shields.io/badge/Live_Site-crowfly22.github.io-purple?style=for-the-badge&logo=github)](https://crowfly22.github.io/portfolio/)
-[![ETH](https://img.shields.io/badge/Chain-Ethereum-627EEA?style=for-the-badge&logo=ethereum)](https://etherscan.io)
-[![SOL](https://img.shields.io/badge/Chain-Solana-9945FF?style=for-the-badge&logo=solana)](https://solscan.io)
+[![GitHub](https://img.shields.io/badge/GitHub-crowfly22-181717?style=for-the-badge&logo=github)](https://github.com/crowfly22)
 
 ---
 
-### 🎯 Active Systems
+### 🚀 Featured Projects
 
-| Project | Status | Details |
-|---------|--------|---------|
-| 🎃 KnightMares Auto-Farm | 🟢 Active | 10 accounts, 2,878 chests, daily cron |
-| 🛡️ Rug Shield | 🟢 Live | On-chain NFT security auditor |
-| 🪂 Airdrop Hunter Pro | 🟢 Live | 52 protocols, multi-chain tracker |
-| 👾 PunksV2 Multi-Mint | ✅ Done | 11 NFTs across 10 wallets |
-| 💀 Revenants NFT | ✅ Done | Contract analysis + paid mint |
-| 🔐 Wallet Infra | 🟢 Active | 100 EVM + 100 SOL wallets |
+| Project | Description | Tech |
+|---------|-------------|------|
+| ⚡ **FlowForge** | AI browser automation, stealth browsing, OTP detection | Python, FastAPI, React |
+| 🔬 **PRISM** | LLM forensics — prompt reverse engineering, model fingerprinting | Node.js, Zero Deps |
+| 🛡️ **Rug Shield** | On-chain NFT security auditor, 15+ checks | Vanilla JS, EVM |
+| 🪂 **Airdrop Hunter Pro** | Multi-chain airdrop tracker, 52 protocols | Multi-Chain |
+| 🐉 **CryptoBeasts** | Pixel art monster RPG, wallet-based starter generation | Canvas 2D, Web3 |
+| ✨ **AuraScope** | Viral aura reader, 24 archetypes, TikTok share cards | Canvas, Web Share API |
 
 ---
 
-### 📊 Live Stats
+### 📊 Stats
 
 ```
-Accounts Active:  10          Wallets Managed:  200
-Total Chests:     2,878       NFTs Minted:      12
-GTD Forged:       10/10       Farm Cycle:       24h
-Airdrops Tracked: 52          Chains Covered:   5
+Projects Shipped: 20+         AI Agents Built: 6
+Protocols Tracked: 52         Wallets Active: 200
+Chains Covered: 5             Tests Passing: 35
+Aura Archetypes: 24           Beast Templates: 16
 ```
-
----
-
-### 🏗️ Tech Stack
-
-- **Chains:** Ethereum, Solana, Base, Arbitrum, Polygon
-- **Contracts:** EIP-1167, Proxy Patterns, ABI Decompilation
-- **Backend:** Supabase, Cron Automation, REST APIs
-- **Frontend:** Single HTML, Zero Dependencies, Glassmorphism UI
-- **Security:** Smart Contract Auditing, RLS Exploit Research
 
 ---
 
 ### 🔗 Links
 
+- **Live Portfolio:** [crowfly22.github.io/portfolio](https://crowfly22.github.io/portfolio/)
 - **GitHub:** [crowfly22](https://github.com/crowfly22)
 - **X / Twitter:** [@HolidayChirps](https://x.com/HolidayChirps)
 
